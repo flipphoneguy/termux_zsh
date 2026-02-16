@@ -1,11 +1,14 @@
 # Termux Zsh Setup
 
-A lightweight, automated script to transform your Termux shell into a powerful Zsh environment. It features a beautiful mobile-friendly prompt, smart autosuggestions and syntax highlighting.
+A lightweight, automated script to transform your Termux shell into a powerful Zsh environment. It features a beautiful mobile-friendly prompt, smart autosuggestions, and Manjaro-style status indicators.
 
 ## Features
 
 * **Automated Install:** Installs `zsh`, `git`, and necessary plugins.
-* **Smart Prompt:** A Mobile-friendly prompt that automatically shortens deep directory paths (e.g., `~/.../parent/current`) to keep your terminal clean.
+* **Smart Prompt:**
+    * **Path Shortening:** Automatically shortens deep directory paths (e.g., `~/.../parent/current`) to keep your terminal clean.
+    * **Visual Status:** Displays a green check (✔) for success or red error codes on the right side.
+    * **Execution Timer:** Automatically shows how long a command took if it runs for longer than 30 seconds.
 * **Productivity Plugins:**
     * **Syntax Highlighting:** Colorizes commands as you type to prevent errors.
     * **Autosuggestions:** Suggests commands based on your history (press `→` to accept).
@@ -25,4 +28,4 @@ chmod +x setup.sh
 
 The script will automatically switch your shell to Zsh upon completion.
 
-The aliases at the end are just basic gemeral useful ones which you can edit or delete...
+The aliases at the end are just basic general useful ones which you can edit or delete.
