@@ -2,6 +2,8 @@
 
 A lightweight, automated script to transform your Termux shell into a powerful Zsh environment. It features a beautiful mobile-friendly prompt, smart autosuggestions, and Manjaro-style status indicators.
 
+![Termux Zsh Screenshot](screenshot.png)
+
 ## Features
 
 * **Automated Install:** Installs `zsh`, `git`, and necessary plugins.

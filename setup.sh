@@ -18,7 +18,6 @@ setopt INC_APPEND_HISTORY
 # --- The Prompt (Manjaro Style with Right Status + Timer) ---
 autoload -U colors && colors
 setopt PROMPT_SUBST
-# Removed TRANSIENT_RPROMPT so the status stays on previous lines
 
 # Timer Hook: Record start time
 function preexec() {
@@ -41,7 +40,7 @@ function precmd() {
 
     # 2. Timer Logic (Only show if > 30s)
     local TIMER_MSG=""
-    if [ ! -z $timer ]; then
+    if [[ -n $timer ]]; then
         local duration=$(($SECONDS - $timer))
         if [[ $duration -ge 30 ]]; then
             local min=$(($duration / 60))
@@ -100,6 +99,17 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format %F{yellow}-- %d --%f
 
+# CRITICAL FIX: Disable file-sort for external storage (stat fails on Android)
+zstyle ':completion:*' file-sort modification
+zstyle ':completion:*' list-colors ''
+
+# Fix for /sdcard and /storage paths - disable problematic stat calls
+zstyle ':completion:*:(all-|)files' ignored-patterns ''
+zstyle ':completion:*:*:*:*:*' file-patterns '%p:globbed-files' '*(-/):directories'
+
+# Disable secure directory checks that fail on Android
+zstyle ':completion:*' accept-exact-dirs true
+
 
 # --- Plugins (Manually Sourced) ---
 [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -118,7 +128,7 @@ bindkey "^[[B" down-line-or-beginning-search
 
 
 # --- Path & Aliases ---
-export PATH="$PREFIX/bin:$HOME/go/bin:$HOME/.cargo/bin"
+export PATH="$PREFIX/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH"
 
 alias la='ls -a'
 alias ll='ls -l'
